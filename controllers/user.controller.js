@@ -1,11 +1,14 @@
 const userService = require('../services/user.service');
-const userModel = require('../models/user.model');
 
 class UserController{
     async registerUser(req, res){
-        const {username, password} = req.body
-        const user = await userService.createUser(username, password)
-        res.status(201).json(user)
+        const {username, name, email, password, role} = req.body
+        const user = await userService.createUser(username, name, email, password, role)
+        if (user != false) {
+            res.status(201).json({ success: true, user: user });
+        } else {
+            res.status(201).json({ success: false, message: 'Пользователь с таким именем уже существует' });
+        }
     }
 
     async getUsers(req, res){
@@ -15,14 +18,22 @@ class UserController{
 
     async loginUser(req, res) {
         const { username, password } = req.body;
-        const isAuthenticated = await userService.authenticateUser(username, password);
-        if (isAuthenticated) {
-        const token = authService.generateAuthToken(username);
-        res.json({ success: true, token });
+        const userData = await userService.authUser(username, password);
+        if (userData.token != false) {
+            res.status(201).json({ success: true, message: 'Пользователь успешно вошел', user: userData.user, token: userData.token });
         } else {
-        res.status(401).json({ success: false, message: 'Неверные учетные данные' });
+            res.status(201).json({ success: false, message: 'Неправильный логин или пароль' });
         }
-      }
+        //const isAuthenticated = await userService.authUser(username, password);
+        // if (isAuthenticated) {
+        //     const token = authService.generateAuthToken(username);
+        //     res.json({ success: true });
+        // } else {
+        // res.status(401).json({ success: false, message: 'Неверные учетные данные' });
+        // }
+    }
+
+    
 
 
     // async getUserById(req, res){
