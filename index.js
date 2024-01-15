@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const authMiddleware = require('./middlewares/authMiddleware');
 
 const userRouter = require('./routes/user.routes')
 const productRouter = require('./routes/products.routes')
@@ -11,17 +13,28 @@ const agentRouter = require('./routes/agent.routes')
 const datesRouter = require('./routes/dates.routes')
 
 const app = express();
+
 const port = 4444;
 
-app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:8080', // Замените на свой фронтенд домен
+    credentials: true,
+  };
+app.use(cookieParser())
+app.use(cors(corsOptions));
 app.use(express.json())
+
 app.use('/api', userRouter)
+
+app.use('/api', authMiddleware);
+
 app.use('/api', productRouter)
 app.use('/api', logsRouter)
 app.use('/api', orderRouter)
 app.use('/api', detailRouter)
 app.use('/api', agentRouter)
 app.use('/api', datesRouter)
+
 
 app.use(express.static('public'))
 app.use(bodyParser.json());

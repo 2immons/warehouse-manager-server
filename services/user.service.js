@@ -35,10 +35,15 @@ async function authUser(username, password) {
     const isPasswordValid = bcrypt.compareSync(password, hash);
 
     if (isPasswordValid) {
-        const token = jwt.sign({ userId: user.id }, 'your_secret_key', { expiresIn: '1h' });
+        const payload = {
+            userId: user.id,
+            username: user.username
+        };
+        const token = jwt.sign(payload, 'your_secret_key', { expiresIn: '1h' });
         return { token, user };
+    } else {
+        return { error: 'Неверный пароль' };
     }
-    else return false
 }
 
 module.exports = {
