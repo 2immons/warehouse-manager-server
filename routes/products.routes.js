@@ -3,7 +3,7 @@ const productController = require('../controllers/product.controller.js')
 const router = new Router()
 // const authMiddleware = require('../middleware/authMiddleware.js')
 
-router.post('/createProduct', productController.createProduct)
+router.post('/create-product', productController.createProduct)
 router.get('/products', productController.getProducts)
 router.get('/product/:id', productController.getProductByID)
 router.put('/update-products', productController.updateProducts)
