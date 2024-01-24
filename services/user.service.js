@@ -42,6 +42,7 @@ async function authUser(username, password) {
         const token = jwt.sign(payload, 'your_secret_key', { expiresIn: '1h' });
         return { token, user };
     } else {
+        console.log('Говно пароль')
         return { error: 'Неверный пароль' };
     }
 }

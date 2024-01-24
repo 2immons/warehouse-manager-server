@@ -34,13 +34,13 @@ class OrderController{
 
             for (const updatedOrderPosition of positions) {
                 const { order_id, product_id, quantity, is_ready_to_ship } = updatedOrderPosition
-
+                
                 await orderService.updateOrderProducts(quantity, is_ready_to_ship, order_id, product_id)
             }
         
             updatedOrders.push(updatedOrdersItem);
           }
-        res.status(201).json({ success: true, updatedOrders: updatedOrders });
+        res.status(201).json({ success: true, updatedOrders: updatedOrders })
     }
 
     async updateOrder(req, res){

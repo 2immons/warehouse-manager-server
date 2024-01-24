@@ -3,6 +3,13 @@
 const jwt = require('jsonwebtoken');
 
 function authMiddleware(req, res, next) {
+    const path = req.path;
+    console.log(path)
+    if (path === '/login' || path === '/register') {
+        // Если это маршрут для входа или регистрации, пропустить middleware и перейти к следующему обработчику
+        return next();
+    }
+
     console.log("token = " + req.cookies.token)
     const token = req.cookies.token;
 

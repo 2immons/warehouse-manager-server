@@ -18,6 +18,7 @@ class UserController{
 
     async loginUser(req, res) {
         const { username, password } = req.body;
+        console.log('эм')
         const userData = await userService.authUser(username, password);
         if (userData.token != false) {
             res.status(201).json({ success: true, message: 'Пользователь успешно вошел', user: userData.user, token: userData.token });

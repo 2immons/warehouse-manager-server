@@ -24,12 +24,8 @@ CREATE TABLE products (
 	name VARCHAR,
     produced INTEGER DEFAULT 0,
     shipped INTEGER DEFAULT 0,
-    readyToShip INTEGER DEFAULT 0
-);
-
-CREATE TABLE compatibilities (
-	detail_id INTEGER REFERENCES details(id),
-    product_id INTEGER REFERENCES products(id)
+    ready_to_ship INTEGER DEFAULT 0,
+	description VARCHAR
 );
 
 CREATE TABLE details (
@@ -57,19 +53,24 @@ CREATE TABLE orders (
     requirements VARCHAR
 );
 
-CREATE TABLE orders_products (
-    order_id INTEGER REFERENCES orders(id),
-	product_id INTEGER REFERENCES products(id),
-	quantity INTEGER,
-	is_ready_to_ship BOOLEAN
-);
-
 CREATE TABLE agents (
     id SERIAL PRIMARY KEY,
 	name VARCHAR,
 	adress VARCHAR,
 	INN VARCHAR,
 	KPP VARCHAR
+);
+
+CREATE TABLE compatibilities (
+	detail_id INTEGER REFERENCES details(id),
+    product_id INTEGER REFERENCES products(id)
+);
+
+CREATE TABLE orders_products (
+    order_id INTEGER REFERENCES orders(id),
+	product_id INTEGER REFERENCES products(id),
+	quantity INTEGER,
+	is_ready_to_ship BOOLEAN
 );
 
 CREATE TABLE products_productions (
@@ -93,6 +94,5 @@ CREATE TABLE details_write_offs (
 
 CREATE TABLE logs_users (
 	log_id INTEGER REFERENCES logs(id),
-	user_id INTEGER REFERENCES users(id),
-	is_written BOOLEAN DEFAULT FALSE
+	user_id INTEGER REFERENCES users(id)
 );
