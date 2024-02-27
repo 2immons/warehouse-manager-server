@@ -6,10 +6,5 @@ const router = new Router()
 router.post('/register', userController.registerUser)
 router.get('/users', userController.getUsers)
 router.post('/login', userController.loginUser)
-// router.get('/user/:id', userController.getUserById)
-// router.put('/user', userController.updateUser)
-// router.delete('/user/:id', userController.deleteUser)
-
-//https://youtu.be/H2GCkRF9eko?t=3973
 
 module.exports = router

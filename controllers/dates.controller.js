@@ -39,17 +39,17 @@ class DatesController{
 
     async getProductsProductions(req, res){
         const productsProductions = await datesService.getProductsProductions()
-        res.status(201).json({ success: true, productsProductions: productsProductions })
+        res.status(201).json({ success: true, productions: productsProductions })
     }
 
-    async getProductsShipping(req, res){
+    async getProductsShippings(req, res){
         const productsShipping = await datesService.getProductsShipping()
-        res.status(201).json({ success: true, productsShipping: productsShipping })
+        res.status(201).json({ success: true, shippings: productsShipping })
     }
 
-    async getProductsWriteOff(req, res){
+    async getProductsWriteOffs(req, res){
         const productsWriteOff = await datesService.getProductsWriteOff()
-        res.status(201).json({ success: true, productsWriteOff: productsWriteOff })
+        res.status(201).json({ success: true, writeOffs: productsWriteOff })
     }
 
     // async updateAgent(req, res){

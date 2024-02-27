@@ -16,7 +16,7 @@ class LogsService{
     }
 
     async getLogs() {
-        const result = await pool.query('SELECT * FROM logs')
+        const result = await pool.query('SELECT logs.*, users.name FROM logs JOIN users ON logs.user_id = users.id')
         return result.rows
     }
 
