@@ -43,5 +43,5 @@ app.listen(port, (e) => {
     if (e) {
         return console.log(e)
     }
-    console.log('Server OK: localhost 4444')
+    console.log('Server OK: http://localhost:4444')
 })
