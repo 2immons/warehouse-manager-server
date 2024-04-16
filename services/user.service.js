@@ -39,10 +39,13 @@ async function authUser(username, password) {
             userId: user.id,
             username: user.username
         };
-        const token = jwt.sign(payload, 'your_secret_key', { expiresIn: '1h' });
+        const tokenValue = jwt.sign(payload, 'your_secret_key', { expiresIn: '1h' });
+        const expirationTime = new Date();
+        expirationTime.setHours(expirationTime.getHours() + 1); // 1 час после текущего времени
+        const token = { "tokenValue": tokenValue, "expirationTime": expirationTime}
         return { token, user };
     } else {
-        console.log('Говно пароль')
+        console.log('Плохой пароль')
         return { error: 'Неверный пароль' };
     }
 }
