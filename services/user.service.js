@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 async function createUser(username, name, email, password, role) {
-    // валидация данных
-
     const existingUser = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
 
     if (existingUser.rows.length > 0) {

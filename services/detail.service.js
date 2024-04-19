@@ -4,15 +4,11 @@ const jwt = require('jsonwebtoken');
 
 class DetailService{
     async createDetail(name, unit, supplied, written_off, supply_date, UPD_SF_number, supplier_name, supplier_INN_KPP, price) {
-        // валидация данных
-
         const result = await pool.query('INSERT INTO details (name, unit, supplied, written_off, supply_date, UPD_SF_number, supplier_name, supplier_INN_KPP, price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *', [name, unit, supplied, written_off, supply_date, UPD_SF_number, supplier_name, supplier_INN_KPP, price]);
         return result.rows[0]
     }
 
     async addCompability(detailsItemId, productId) {
-        // валидация данных
-
         const result = await pool.query('INSERT INTO compatibilities (detail_id, product_id) VALUES ($1, $2) RETURNING *', [detailsItemId, productId]);
         return result.rows[0]
     }

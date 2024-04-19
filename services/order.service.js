@@ -2,15 +2,11 @@ const pool = require('../db')
 
 class OrderService{
     async createOrder(client_id, is_commercial_secret, creation_date, deadline, doc_number) {
-        // валидация данных
-
         const result = await pool.query('INSERT INTO orders (client_id, is_commercial_secret, creation_date, deadline, doc_number) VALUES ($1, $2, $3, $4, $5) RETURNING *', [client_id, is_commercial_secret, creation_date, deadline, doc_number]);
         return result.rows[0]
     }
 
     async createOrderProducts(order_id, product_id, quantity, is_ready_to_ship) {
-        // валидация данных
-
         const result = await pool.query('INSERT INTO orders_products (order_id, product_id, quantity, is_ready_to_ship) VALUES ($1, $2, $3, $4) RETURNING *', [order_id, product_id, quantity, is_ready_to_ship]);
         return result.rows[0]
     }

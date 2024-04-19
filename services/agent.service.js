@@ -3,8 +3,6 @@ const pool = require('../db')
 
 class AgentService{
     async createAgent(name, adress, INN, KPP) {
-        // валидация данных
-
         const existingAgent = await pool.query('SELECT * FROM agents WHERE name = $1', [name]);
 
         if (existingAgent.rows.length > 0) {

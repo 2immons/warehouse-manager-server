@@ -4,8 +4,6 @@ const jwt = require('jsonwebtoken');
 
 class LogsService{
     async createLog(user_id, date, operation) {
-        // валидация данных
-
         const result = await pool.query('INSERT INTO logs (user_id, date, operation) VALUES ($1, $2, $3) RETURNING *', [user_id, date, operation])
 
         return result.rows[0]
