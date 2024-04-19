@@ -15,6 +15,9 @@ CREATE TABLE roles (
     name VARCHAR
 );
 
+INSERT INTO roles(name) VALUES ('Администратор');
+INSERT INTO roles(name) VALUES ('Отдел производства')
+
 
 CREATE TABLE agents (
     id SERIAL PRIMARY KEY,
