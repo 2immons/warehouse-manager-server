@@ -1,3 +1,16 @@
+/*
+const pool = new Pool({
+    user: "postgres",
+    password: 'Originrega',
+    host: 'localhost',
+    port: 5432,
+    database: 'production-management-db',
+    encoding: 'UTF8'
+})
+*/
+
+CREATE DATABASE production-management-db
+
 CREATE TABLE roles (
     id SERIAL PRIMARY KEY,
     name VARCHAR
@@ -28,6 +41,11 @@ CREATE TABLE products (
 	description VARCHAR
 );
 
+CREATE TABLE compatibilities (
+	detail_id INTEGER REFERENCES details(id),
+    product_id INTEGER REFERENCES products(id)
+);
+
 CREATE TABLE details (
     id SERIAL PRIMARY KEY,
 	name VARCHAR,
@@ -53,24 +71,19 @@ CREATE TABLE orders (
     requirements VARCHAR
 );
 
+CREATE TABLE orders_products (
+    order_id INTEGER REFERENCES orders(id),
+	product_id INTEGER REFERENCES products(id),
+	quantity INTEGER,
+	is_ready_to_ship BOOLEAN
+);
+
 CREATE TABLE agents (
     id SERIAL PRIMARY KEY,
 	name VARCHAR,
 	adress VARCHAR,
 	INN VARCHAR,
 	KPP VARCHAR
-);
-
-CREATE TABLE compatibilities (
-	detail_id INTEGER REFERENCES details(id),
-    product_id INTEGER REFERENCES products(id)
-);
-
-CREATE TABLE orders_products (
-    order_id INTEGER REFERENCES orders(id),
-	product_id INTEGER REFERENCES products(id),
-	quantity INTEGER,
-	is_ready_to_ship BOOLEAN
 );
 
 CREATE TABLE products_productions (
