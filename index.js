@@ -11,13 +11,14 @@ const orderRouter = require('./routes/order.routes')
 const detailRouter = require('./routes/detail.routes')
 const agentRouter = require('./routes/agent.routes')
 const datesRouter = require('./routes/dates.routes')
+const documentRouter = require('./routes/document.routes')
 
 const app = express();
 
 const port = 4444;
 
 const corsOptions = {
-    origin: 'http://localhost:8080', // Замените на свой фронтенд домен
+    origin: 'http://localhost:8080',
     credentials: true,
   };
 app.use(cookieParser())
@@ -34,6 +35,7 @@ app.use('/api', orderRouter)
 app.use('/api', detailRouter)
 app.use('/api', agentRouter)
 app.use('/api', datesRouter)
+app.use('/api', documentRouter)
 
 
 app.use(express.static('public'))

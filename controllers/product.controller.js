@@ -45,7 +45,7 @@ class ProductController{
         const deletedProduct = await productService.deleteProduct(id)
         res.status(201).json({ success: true, deletedProduct: deletedProduct });
     }
-    async getdocument (req, res) {
+    async getDocument (req, res) {
         const document = "D:/GitHub Repositories/warehouse-manager/production-management/src/documents/UPD.docx"
         res.sendFile(document)
     }

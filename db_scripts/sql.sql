@@ -115,7 +115,9 @@ CREATE TABLE logs_users (
 
 CREATE TABLE documents (
     id SERIAL PRIMARY KEY,
-    filename VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
     file_data BYTEA NOT NULL,
-	description VARCHAR(255) NOT NULL
+	description VARCHAR(255) NOT NULL,
+	is_default BOOLEAN NOT NULL,
+	type INTEGER
 );

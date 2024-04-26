@@ -1,27 +1,24 @@
 const pool = require('../db')
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
-async function createDocument(username, name, email, password, role) {
-    const existingUser = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
-
-    if (existingUser.rows.length > 0) {
-        return false
+class DocumentService{
+    async createDocument(title, file_data, description, isDefault, type) {
+        const result = await pool.query('INSERT INTO documents (title, file_data, description, is_default, type) VALUES ($1, $2, $3, $4, $5) RETURNING *', [title, file_data, description, isDefault, type]);
+        return result.rows[0]
     }
 
-    const saltRounds = 10;
-    const salt = await bcrypt.genSalt(saltRounds)
-    const hashedPassword = await bcrypt.hash(password, salt)
-    const result = await pool.query('INSERT INTO documents (username, name, email, hash, role) VALUES ($1, $2, $3, $4, $5) RETURNING *', [username, name, email, hashedPassword, role]);
-    return result.rows[0]
-}
+    async getDocuments() {
+        const result = await pool.query('SELECT * FROM documents')
+        return result.rows
+    }
 
-async function getDocuments() {
-    const result = await pool.query('SELECT * FROM documents')
-    return result.rows
-}
+    async updateDocument(title, file_data, description, isDefault, type, id) {
+        const result = await pool.query('UPDATE documents SET title = $1, file_data = $2, description = $3, is_default = $4, type = $5 WHERE id = $6', [title, file_data, description, isDefault, type, id])
+        return result.rows[0]
+    }
 
-module.exports = {
-    createDocument,
-    getDocuments
-};
+    async deleteDocument(id) {
+        const result = await pool.query('DELETE FROM documents WHERE id = $1', [id])
+        return result.rows[0]
+    }
+}
+module.exports = new DocumentService()

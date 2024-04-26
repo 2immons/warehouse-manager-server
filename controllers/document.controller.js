@@ -2,18 +2,26 @@ const documentService = require('../services/document.service');
 
 class DocumentController{
     async createDocument(req, res){
-        const {username, name, email, password, role} = req.body
-        const user = await documentService.createDocument(username, name, email, password, role)
-        if (user != false) {
-            res.status(201).json({ success: true, user: user });
-        } else {
-            res.status(201).json({ success: false, message: 'Пользователь с таким именем уже существует' });
-        }
+        const {title, file_data, description, isDefault, type} = req.body
+        const document = await documentService.createDocument(title, file_data, description, isDefault, type)
+        res.status(201).json({ success: true, document: document })
     }
 
     async getDocuments(req, res){
-        const users = await documentService.getDocuments()
-        res.status(201).json({ success: true, users: users });
+        const documents = await documentService.getDocuments()
+        res.status(201).json({ success: true, documents: documents });
+    }
+
+    async updateDocument(req, res){
+        const { title, file_data, description, isDefault, type, id } = req.body;
+        const updatedDocument = await documentService.updateDocument(title, file_data, description, isDefault, type, id)
+        res.status(201).json({ success: true, updatedDocument: updatedDocument });
+    }
+
+    async deleteDocument(req, res){
+        const id = req.params.id
+        const deletedDocument = await documentService.deleteDocument(id)
+        res.status(201).json({ success: true, deletedDocument: deletedDocument })
     }
 }
 
