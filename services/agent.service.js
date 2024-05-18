@@ -1,4 +1,3 @@
-const { deleteAgent } = require('../controllers/agent.controller');
 const pool = require('../db')
 
 class AgentService{

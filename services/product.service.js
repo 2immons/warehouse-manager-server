@@ -1,8 +1,6 @@
 const pool = require('../db')
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
-class productService{
+class ProductService{
     async createProduct(name, description) {
         const result = await pool.query('INSERT INTO products (name, description) VALUES ($1, $2) RETURNING *', [name, description]);
         return result.rows[0]
@@ -29,4 +27,4 @@ class productService{
     }
 }
 
-module.exports = new productService()
+module.exports = new ProductService()

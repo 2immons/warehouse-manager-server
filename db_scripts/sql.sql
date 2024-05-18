@@ -24,7 +24,8 @@ CREATE TABLE agents (
 	name VARCHAR,
 	adress VARCHAR,
 	INN VARCHAR,
-	KPP VARCHAR
+	KPP VARCHAR,
+	is_deleted BOOLEAN
 );
 
 CREATE TABLE details (
@@ -47,7 +48,8 @@ CREATE TABLE users (
     name VARCHAR,
     email VARCHAR,
     hash VARCHAR,
-    role INTEGER REFERENCES roles(id)
+    role INTEGER REFERENCES roles(id),
+	is_deleted BOOLEAN
 );
 
 CREATE TABLE logs (
@@ -120,4 +122,13 @@ CREATE TABLE documents (
 	description VARCHAR(255) NOT NULL,
 	is_default BOOLEAN NOT NULL,
 	type INTEGER
+);
+
+CREATE TABLE settings (
+    is_in_configuration_mode BOOLEAN,
+	name VARCHAR(255) NOT NULL,
+	adress VARCHAR(255) NOT NULL,
+	INN VARCHAR(255) NOT NULL,
+	OGRN VARCHAR(255) NOT NULL,
+	CEO VARCHAR(255) NOT NULL, 
 );

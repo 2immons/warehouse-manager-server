@@ -1,6 +1,4 @@
 const pool = require('../db')
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
 class DetailService{
     async createDetail(name, unit, supplied, written_off, supply_date, UPD_SF_number, supplier_name, supplier_INN_KPP, price) {

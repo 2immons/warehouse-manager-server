@@ -24,34 +24,13 @@ class UserController{
         } else {
             res.status(201).json({ success: false, message: 'Неправильный логин или пароль' });
         }
-        //const isAuthenticated = await userService.authUser(username, password);
-        // if (isAuthenticated) {
-        //     const token = authService.generateAuthToken(username);
-        //     res.json({ success: true });
-        // } else {
-        // res.status(401).json({ success: false, message: 'Неверные учетные данные' });
-        // }
     }
 
-    
-
-
-    // async getUserById(req, res){
-    //     const id = req.params.id
-    //     const user = await db.query('SELECT * FROM Users WHERE id = $1', [id])
-    //     res.json(user.rows[0])
-    // }
-
-    // async updateUser(req, res){
-    //     const {id, login, password, role} = req.body
-    //     const updatedUser = await db.query('UPDATE Users SET login = $1, password = $2, role = $3 WHERE id = $4', [login, password, role, id])
-    //     res.json(updatedUser.rows[0])
-    // }
-    // async deleteUser(req, res){
-    //     const id = req.params.id
-    //     const deletedUser = await db.query('DELETE FROM Users WHERE id = $1', [id])
-    //     res.json(deletedUser.rows[0])
-    // }
+    async deleteUser(req, res){
+        const id = req.params.id
+        const deletedUser = await userService.deleteUser(id)
+        res.status(201).json({ success: true, deletedUser: deletedUser });
+    }
 }
 
 module.exports = new UserController()
