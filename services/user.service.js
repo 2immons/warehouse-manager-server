@@ -3,7 +3,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 class userService{
-    async createUser(username, name, email, password, role) {
+    async createUser(username, name, email, password) {
+        const users = await pool.query(`SELECT * from users`);
+        let role = users.rows.length < 0 ? 1: 2
+
         const existingUser = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
 
         if (existingUser.rows.length > 0) {
@@ -17,12 +20,18 @@ class userService{
         return result.rows[0]
     }
 
+    async updateUser(username, name, email, role, is_deleted, id) {
+        const result = await pool.query('UPDATE users SET username = $1, name = $2, email = $3, role = $4, is_deleted = $5 WHERE id = $6', [username, name, email, role, is_deleted, id])
+        return result.rows[0]
+    }
+
     async getUsers() {
         const result = await pool.query(`
             SELECT users.*, roles.name as role_name
             FROM users
-            JOIN roles ON users.role = roles.id;
-        `);
+            JOIN roles ON users.role = roles.id
+            WHERE users.is_deleted IS NOT TRUE;
+        `)
 
         return result.rows
     }
@@ -30,9 +39,10 @@ class userService{
     async authUser(username, password) {
         const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
 
-        if (result.rows.length === 0) {
-        return false;
+        if (result.rows.length === 0 || result.rows[0].is_deleted === true) {
+            return { error: 'Нет такого пользователя или пользователь удален' };
         }
+
         const user = result.rows[0]
         const hash = String(user.hash)
 
@@ -52,10 +62,6 @@ class userService{
             console.log('Плохой пароль')
             return { error: 'Неверный пароль' };
         }
-    }
-    async deleteUser(id){
-        const deletedUser = await db.query('DELETE FROM users WHERE id = $1', [id])
-        return deletedUser.rows[0]
     }
 }
 

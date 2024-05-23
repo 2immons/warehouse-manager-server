@@ -2,8 +2,8 @@ const userService = require('../services/user.service');
 
 class UserController{
     async registerUser(req, res){
-        const {username, name, email, password, role} = req.body
-        const user = await userService.createUser(username, name, email, password, role)
+        const {username, name, email, password} = req.body
+        const user = await userService.createUser(username, name, email, password)
         if (user != false) {
             res.status(201).json({ success: true, user: user });
         } else {
@@ -26,10 +26,10 @@ class UserController{
         }
     }
 
-    async deleteUser(req, res){
-        const id = req.params.id
-        const deletedUser = await userService.deleteUser(id)
-        res.status(201).json({ success: true, deletedUser: deletedUser });
+    async updateUser(req, res){
+        const { username, name, email, role, is_deleted, id } = req.body
+        const updatedUser = await userService.updateUser(username, name, email, role, is_deleted, id)
+        res.status(201).json({ success: true, updatedUser: updatedUser });
     }
 }
 

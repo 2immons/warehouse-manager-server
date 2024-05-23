@@ -1,7 +1,7 @@
 const pool = require('../db')
 
 class SettingsService{
-    async getUsers() {
+    async getSettings() {
         const result = await pool.query('SELECT * FROM settings')
         return result.rows[0]
     }

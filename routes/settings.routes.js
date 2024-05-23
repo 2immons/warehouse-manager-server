@@ -3,6 +3,6 @@ const settingsController = require('../controllers/settings.controller.js')
 const router = new Router()
 
 router.get('/settings', settingsController.getSettings)
-router.put('/settings', settingsController.updateSettings)
+router.put('/update-settings', settingsController.updateSettings)
 
 module.exports = router

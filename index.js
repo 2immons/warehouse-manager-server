@@ -12,8 +12,11 @@ const detailRouter = require('./routes/detail.routes')
 const agentRouter = require('./routes/agent.routes')
 const datesRouter = require('./routes/dates.routes')
 const documentRouter = require('./routes/document.routes')
+const settingsRouter = require('./routes/settings.routes')
 
 const app = express();
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 const port = 4444;
 
@@ -36,14 +39,14 @@ app.use('/api', detailRouter)
 app.use('/api', agentRouter)
 app.use('/api', datesRouter)
 app.use('/api', documentRouter)
+app.use('/api', settingsRouter)
 
 
 app.use(express.static('public'))
-app.use(bodyParser.json());
 
 app.listen(port, (e) => {
     if (e) {
         return console.log(e)
     }
-    console.log('Server OK: http://localhost:4444')
+    console.log('Server started: http://localhost:4444')
 })

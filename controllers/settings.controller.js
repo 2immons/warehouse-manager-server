@@ -7,8 +7,8 @@ class SettingsController{
     }
 
     async updateSettings(req, res){
-        const { is_in_configuration_mode, name, adress, INN, OGRN, CEO } = req.body;
-        const updatedSettings = await settingsService.updateSettings(is_in_configuration_mode, name, adress, INN, OGRN, CEO)
+        const { is_in_configuration_mode, name, adress, inn, ogrn, ceo } = req.body;
+        const updatedSettings = await settingsService.updateSettings(is_in_configuration_mode, name, adress, inn, ogrn, ceo)
         res.status(201).json({ success: true, updatedSettings: updatedSettings });
     }
 }

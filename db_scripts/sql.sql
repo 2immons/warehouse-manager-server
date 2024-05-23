@@ -17,7 +17,7 @@ CREATE TABLE roles (
 
 INSERT INTO roles(name) VALUES ('Администратор');
 INSERT INTO roles(name) VALUES ('Отдел производства')
-
+INSERT INTO settings(is_in_configuration_mode, name, adress, INN, OGRN, CEO) VALUES (false, 'ООО "Вектор', 'Саратов', '2223433322344', '2223433322344', 'Иванов В.П.')
 
 CREATE TABLE agents (
     id SERIAL PRIMARY KEY,
@@ -130,5 +130,5 @@ CREATE TABLE settings (
 	adress VARCHAR(255) NOT NULL,
 	INN VARCHAR(255) NOT NULL,
 	OGRN VARCHAR(255) NOT NULL,
-	CEO VARCHAR(255) NOT NULL, 
+	CEO VARCHAR(255) NOT NULL
 );
