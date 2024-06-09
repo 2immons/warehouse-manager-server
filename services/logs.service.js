@@ -26,11 +26,6 @@ class LogsService{
         return result.rows
     }
 
-    // async updateLog(user_id, date, operation, is_read, id) {
-    //     const result = await pool.query('UPDATE logs SET user_id = $1, date = $2, operation = $3, is_read = $4 WHERE id = $5', [user_id, date, operation, is_read, id])
-    //     return result.rows[0]
-    // }
-
     async updateLog(id, userId) {
         const result = await pool.query('INSERT INTO logs_users(log_id, user_id) VALUES ($1, $2) RETURNING *', [id, userId])
         return result.rows[0]

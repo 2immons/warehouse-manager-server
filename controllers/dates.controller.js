@@ -51,21 +51,6 @@ class DatesController{
         const productsWriteOff = await datesService.getProductsWriteOff()
         res.status(201).json({ success: true, writeOffs: productsWriteOff })
     }
-
-    // async updateAgent(req, res){
-    //     const {name, adress, INN, KPP, id} = req.body
-    //     const updatedAgent = await datesService.updateAgent(name, adress, INN, KPP, id)
-    //     if (updatedAgent != false) {
-    //         res.status(201).json({ success: true, updatedAgent: updatedAgent });
-    //     } else {
-    //         res.status(201).json({ success: false, message: 'Пользователь с таким именем уже существует' });
-    //     }
-    // }
-    // async deleteAgent(req, res){
-    //     const id = req.params.id
-    //     const deletedAgent = await datesService.deleteAgent(id)
-    //     res.status(201).json({ success: true, deletedAgent: deletedAgent })
-    // }
 }
 
 module.exports = new DatesController()

@@ -55,7 +55,7 @@ class userService{
             };
             const tokenValue = jwt.sign(payload, 'your_secret_key', { expiresIn: '1h' });
             const expirationTime = new Date();
-            expirationTime.setHours(expirationTime.getHours() + 1); // 1 час после текущего времени
+            expirationTime.setHours(expirationTime.getHours() + 1);
             const token = { "tokenValue": tokenValue, "expirationTime": expirationTime}
             return { token, user };
         } else {

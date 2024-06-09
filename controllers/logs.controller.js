@@ -47,7 +47,6 @@ class LogsController{
     async updateLog(req, res){
         const userId = req.cookies.userId
         const {id} = req.body
-        // const updatedLog = await logsService.updateLog(user_id, date, operation, is_read, id)
         const updatedLog = await logsService.updateLog(id, userId)
         res.status(201).json({ success: true, updatedLog: updatedLog });
     }

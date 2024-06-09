@@ -2,16 +2,7 @@ const detailService = require('../services/detail.service');
 const bodyParser = require('body-parser');
 
 class DetailController{
-    // async createDetail(req, res){
-    //     const {name, unit, supplied, written_off, supply_date, UPD_SF_number, supplier_name, supplier_INN_KPP, price} = req.body
-    //     const detail = await detailService.createDetail(name, unit, supplied, written_off, supply_date, UPD_SF_number, supplier_name, supplier_INN_KPP, price)
-
-    //     if (detail != false) {
-    //         res.status(201).json({ success: true, detail: detail });
-    //     }
-    // }
-
-    async createDetails(req, res){ // переделать
+    async createDetails(req, res){
         const details = []
         const detailsData = req.body;
         for (const detail of detailsData) {
@@ -44,7 +35,7 @@ class DetailController{
         res.status(201).json({ success: true, detail: detail });
     }
 
-    async updateDetails(req, res){ // переделать
+    async updateDetails(req, res){
         const updatedDetails = []
         const updatedDetailsData = req.body;
         for (const updatedDetail of updatedDetailsData) {
